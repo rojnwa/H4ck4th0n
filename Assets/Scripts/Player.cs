@@ -47,15 +47,7 @@ public class Player : MonoBehaviour
             rb2D.transform.Translate(transform.right * speed * Time.fixedDeltaTime);
         }
 
-        if (Input.GetButton("Sprint") && sprintUpgradeUpgradeAcquired)
-        {
-            Debug.Log(Input.GetButtonDown("Sprint"));
-            speed = 20;
-        }
-        else
-        {
-            speed = 10;
-        }
+        speed = (Input.GetButton("Sprint") && sprintUpgradeUpgradeAcquired) ? 20 : 10;
 
         if (Input.GetButtonDown("Jump") && (isGrounded == Grounded.Resting))
         {
