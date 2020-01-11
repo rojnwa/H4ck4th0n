@@ -79,6 +79,11 @@ public class Player : MonoBehaviour {
             rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         }
 
+        if (Input.GetButtonUp("Left") || Input.GetButtonUp("Right"))
+        {
+            animator.SetBool("Walks", false);
+        }
+
         healthbar.value = health;
     }
 
@@ -111,6 +116,7 @@ public class Player : MonoBehaviour {
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
         if (Input.GetButton("Left")) {
+            animator.SetBool("Walks", true);
             rb2D.transform.Translate(-transform.right * speed * Time.fixedDeltaTime);
             //camHelper.transform.localPosition = new Vector3(-5, 0, 0);
             //transform.eulerAngles = new Vector3(0, 180, 0);
@@ -118,6 +124,7 @@ public class Player : MonoBehaviour {
         }
 
         if (Input.GetButton("Right")) {
+            animator.SetBool("Walks", true);
             rb2D.transform.Translate(transform.right * speed * Time.fixedDeltaTime);
             //camHelper.transform.localPosition = new Vector3(5, 0, 0);
             //transform.eulerAngles = new Vector3(0, 0, 0);
@@ -145,6 +152,10 @@ public class Player : MonoBehaviour {
 
     void DropThrough() {
         col2D.enabled = !col2D.enabled;
+    }
+
+    void Heal(float amount) {
+        health += amount;
     }
 
     void Teleport(string location) {
