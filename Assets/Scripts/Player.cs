@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
     private PolygonCollider2D swordCol;
     [SerializeField] private float health = 1f;
     [SerializeField] private Slider healthbar;
+    private float iFrames;
 
     void Start() {
         col2D = GetComponent<Collider2D>();
@@ -32,9 +33,25 @@ public class Player : MonoBehaviour {
 
     }
 
-
     void Update() {
         if (health <= 0) SceneManager.LoadScene("Menu");
+        if (iFrames > 0) {
+            iFrames -= Time.deltaTime;
+            float flashtime = 0.08333f;
+            if (Time.time % flashtime < flashtime / 2) {
+                foreach (var sr in gameObject.GetComponentsInChildren<SpriteRenderer>()) {
+                    sr.enabled = true;
+                }
+            } else {
+                foreach (var sr in gameObject.GetComponentsInChildren<SpriteRenderer>()) {
+                    sr.enabled = false;
+                }
+            }
+        } else {
+            foreach (var sr in gameObject.GetComponentsInChildren<SpriteRenderer>()) {
+                sr.enabled = true;
+            }
+        }
 
         if (Input.GetButtonDown("Fire1")) {
             animator.SetTrigger("Attack");
@@ -59,7 +76,10 @@ public class Player : MonoBehaviour {
     }
 
     void GetDamage(float damage) {
-        health -= damage;
+        if (iFrames <= 0) {
+            health -= damage;
+            iFrames = 2f;
+        }
     }
 
     void walkUpgradeAcquired() {

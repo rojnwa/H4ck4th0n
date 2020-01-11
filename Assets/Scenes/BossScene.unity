@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -338,12 +338,12 @@ PrefabInstance:
     - target: {fileID: 4152905763282548038, guid: fc03af649b86c96d4a2d99e477a7fe08,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.822479
+      value: 12.812833
       objectReference: {fileID: 0}
     - target: {fileID: 4152905763282548038, guid: fc03af649b86c96d4a2d99e477a7fe08,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7673761
+      value: -1.4026239
       objectReference: {fileID: 0}
     - target: {fileID: 4152905763282548038, guid: fc03af649b86c96d4a2d99e477a7fe08,
         type: 3}
@@ -1173,9 +1173,9 @@ PolygonCollider2D:
       - {x: 0.01, y: -1.01}
       - {x: 0.03, y: -1.13}
       - {x: 0.06, y: -1.18}
-      - {x: 0.047753096, y: -2.9858036}
-      - {x: 0.059063435, y: -3.3781054}
-      - {x: 0.023572922, y: -5.8199096}
+      - {x: 0.8427801, y: -2.622762}
+      - {x: 1.0016427, y: -2.987882}
+      - {x: 2.537229, y: -5.7437572}
       - {x: 0.089999996, y: -1.17}
       - {x: 0.099999994, y: -1.14}
       - {x: 0.14, y: -0.90999997}
@@ -1695,12 +1695,12 @@ PrefabInstance:
     - target: {fileID: 5040551350149236183, guid: fc1c253dbc07b970ba64b170650f5201,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.122479
+      value: 13.112833
       objectReference: {fileID: 0}
     - target: {fileID: 5040551350149236183, guid: fc1c253dbc07b970ba64b170650f5201,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7673761
+      value: -1.4026239
       objectReference: {fileID: 0}
     - target: {fileID: 5040551350149236183, guid: fc1c253dbc07b970ba64b170650f5201,
         type: 3}
@@ -3737,26 +3737,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7444888990994038539, guid: 953082122e42c80428857714ba4a757e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7444888991115092709, guid: 953082122e42c80428857714ba4a757e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7444888991622888838, guid: 953082122e42c80428857714ba4a757e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7444888991847054463, guid: 953082122e42c80428857714ba4a757e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 953082122e42c80428857714ba4a757e, type: 3}
