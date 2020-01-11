@@ -36,29 +36,41 @@ public class Player : MonoBehaviour {
             Invoke("ToggleSwordCollider", 0.3f);
         }
 
+        if (doubleJumpUpgradeAcquired && (isGrounded == Grounded.Jumping) && Input.GetButtonDown("Jump")) {
+            isGrounded = Grounded.DoubleJumped;
+            rb2D.velocity=Vector2.zero;
+            rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            animator.SetTrigger("DoubleJump");
+        }
+
         if (Input.GetButtonDown("Jump") && (isGrounded == Grounded.Resting)) {
             animator.SetTrigger("Jump");
             isGrounded = Grounded.Jumping;
             rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-
-            if (doubleJumpUpgradeAcquired && (isGrounded != Grounded.DoubleJumped) && Input.GetButtonDown("Jump")) {
-                animator.SetTrigger("DoubleJump");
-                isGrounded = Grounded.DoubleJumped;
-                rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            }
         }
 
         healthbar.value = health;
-
     }
 
     void GetDamage(float damage) {
         health -= damage;
     }
 
+    void walkUpgradeAcquired()
+    {
+        sprintUpgradeUpgradeAcquired = true;
+        Leg[] legs = GetComponentsInChildren<Leg>();
+        for(int i=0; i<legs.Length; i++)
+        {
+            legs[i].GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
+        }
+    }
+
     void jumpUpgradeAcquired() {
         GetComponentInChildren<FireWings>().gameObject.SetActive(true);
         doubleJumpUpgradeAcquired = true;
+        var fireWingsGameObject = GetComponentInChildren<FireWings>().gameObject;
+        fireWingsGameObject.transform.localScale=fireWingsGameObject.GetComponent<FireWings>().oScale;
     }
 
     void ToggleSwordCollider() {
