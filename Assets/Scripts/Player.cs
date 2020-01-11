@@ -52,6 +52,12 @@ public class Player : MonoBehaviour {
         health -= damage;
     }
 
+    void jumpUpgradeAcquired()
+    {
+        GetComponentInChildren<FireWings>().gameObject.SetActive(true);
+        doubleJumpUpgradeAcquired = true;
+    }
+
     void ToggleSwordCollider() {
         swordCol.enabled = !swordCol.enabled;
     }
