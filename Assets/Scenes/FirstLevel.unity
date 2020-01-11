@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2519,7 +2519,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 6e-45, y: 1e-45, z: 1.6114932e-38, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3634,7 +3634,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 38.841553, y: -10.4}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3645,7 +3645,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 70.816895, y: 5.209999}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &1789193769
 Transform:
@@ -3655,8 +3655,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789193766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.555515, y: 1.6246207, z: -0.8515625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 42.4, y: -6.6, z: 0}
+  m_LocalScale: {x: 150, y: 3, z: 2.6433}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -3911,12 +3911,12 @@ PrefabInstance:
     - target: {fileID: 4152905763282548038, guid: fc03af649b86c96d4a2d99e477a7fe08,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.1505165
+      value: 5.1505218
       objectReference: {fileID: 0}
     - target: {fileID: 4152905763282548038, guid: fc03af649b86c96d4a2d99e477a7fe08,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9290793
+      value: 0.92907643
       objectReference: {fileID: 0}
     - target: {fileID: 4152905763282548038, guid: fc03af649b86c96d4a2d99e477a7fe08,
         type: 3}
@@ -3990,7 +3990,7 @@ PrefabInstance:
     - target: {fileID: 5040551350149236183, guid: fc1c253dbc07b970ba64b170650f5201,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.155115
+      value: 5.1551204
       objectReference: {fileID: 0}
     - target: {fileID: 5040551350149236183, guid: fc1c253dbc07b970ba64b170650f5201,
         type: 3}
