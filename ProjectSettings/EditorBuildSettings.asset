@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BossScene.unity
     guid: f779e9eeb35d4d343a08af884eada5d9
+  - enabled: 1
+    path: Assets/Scenes/IceHeaven.unity
+    guid: a608a8036a4013740a0f68833f942706
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: f5773856adef5d948943984e2139365a
   m_configObjects: {}
