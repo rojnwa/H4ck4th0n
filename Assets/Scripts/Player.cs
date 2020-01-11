@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
 
     void Update() {
         if (iFrames > 0) {
-            iFrames -= Time.time;
+            iFrames -= Time.deltaTime;
             float flashtime = 0.08333f;
             if(Time.time%flashtime < flashtime/2 ) {
                 foreach(var sr in gameObject.GetComponentsInChildren<SpriteRenderer>()){
