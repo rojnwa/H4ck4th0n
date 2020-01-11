@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6493135534958571082}
   - component: {fileID: 6493135534958571086}
   - component: {fileID: 6493135534958571085}
+  - component: {fileID: 1673344812}
   m_Layer: 0
   m_Name: fairynoicicles
   m_TagString: Untagged
@@ -115,6 +116,8 @@ MonoBehaviour:
   spikeDistance: 3
   hurtable: 1
   WhiteSprite: {fileID: 21300000, guid: 04438c93152a5ac43ad70190f001579d, type: 3}
+  health: 1
+  healthUI: {fileID: 0}
 --- !u!50 &6493135534958571086
 Rigidbody2D:
   serializedVersion: 4
@@ -149,7 +152,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.74, y: 0.46}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -160,5 +163,17 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.64, y: 5.34}
+  m_Size: {x: 0.58, y: 3.61}
   m_EdgeRadius: 0
+--- !u!114 &1673344812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493135534958571083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f731ed556503d17a9ccc0a5527ebb83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

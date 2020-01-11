@@ -36,8 +36,11 @@ public class IceFairy : MonoBehaviour
 
     public void Hurt(float damage){
         if(hurtable){
+            if(health <= 0){
+                Die();
+            }
             iFrames = 1.5f;
-            health -= 0.05f;
+            health -= 0.4f;
         }
     }
 
@@ -57,9 +60,6 @@ public class IceFairy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Input.GetKeyDown("space"))
-            Hurt(0);
-
         if(isDropping){
             transform.Translate(Vector3.down * dropSpeed * Time.fixedDeltaTime);
         }
@@ -150,13 +150,14 @@ public class IceFairy : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(loweringDramatically){
-            loweringDramatically=false;
-            GoOffscreen();
-            healthUI.gameObject.active=true;
-            return;
-        }
-        if(other.gameObject.tag == "ground"){
+        if(other.gameObject.GetComponent<GroundScript>()){
+            if (loweringDramatically) {
+                loweringDramatically = false;
+                GoOffscreen();
+                healthUI.gameObject.SetActive(true);
+                preRisePos=transform.position;
+                return;
+            }
             isDropping=false;
             RaiseSpikes();
             ThrowSingleIce();
@@ -212,5 +213,15 @@ public class IceFairy : MonoBehaviour
             var playerPos = player.transform;
             ice.transform.LookAt(playerPos,Vector3.up);
             ice.transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+    }
+
+    public void Die(){
+        var rb = GetComponent<Rigidbody2D>();
+        rb.constraints=RigidbodyConstraints2D.None;
+        rb.AddForce(Vector2.up*200);
+        healthUI.gameObject.SetActive(false);
+        rb.AddTorque(800);
+        this.enabled=false;
+        this.GetComponent<Collider2D>().isTrigger=true;
     }
 }

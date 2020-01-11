@@ -36,6 +36,7 @@ public class Player : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
         if (Input.GetButton("Left")) {
             rb2D.transform.Translate(-transform.right * speed * Time.fixedDeltaTime);
