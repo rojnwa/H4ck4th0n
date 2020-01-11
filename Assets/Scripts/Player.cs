@@ -147,6 +147,10 @@ public class Player : MonoBehaviour {
         col2D.enabled = !col2D.enabled;
     }
 
+    void Heal(float amount) {
+        health += amount;
+    }
+
     void Teleport(string location) {
 
         PlayerPrefs.SetFloat("Health", health);
