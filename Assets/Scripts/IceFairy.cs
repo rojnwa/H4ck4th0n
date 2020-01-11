@@ -34,6 +34,7 @@ public class IceFairy : MonoBehaviour {
     public GameObject wings;
     public GameObject wingsSpawnLocation;
     public bool isDead;
+    private bool hardMode;
     // Start is called before the first frame update
 
     public void Hurt(float damage) {
@@ -51,6 +52,7 @@ public class IceFairy : MonoBehaviour {
         originalSpikeLoc = spikeLocationParent.transform.position;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         originalSprite = spriteRenderer.sprite;
+        hardMode=PlayerPrefs.GetInt("BossKilled", 0)==1;
 
         healthUI.gameObject.active = false;
     }
@@ -91,7 +93,7 @@ public class IceFairy : MonoBehaviour {
         }
 
         if (risingOffscreen) {
-            transform.Translate(Vector3.up * 20 * Time.fixedDeltaTime);
+            transform.Translate(Vector3.up * (hardMode?25:20) * Time.fixedDeltaTime);
             if (Vector3.Distance(preRisePos, transform.position) > 30) {
                 risingOffscreen = false;
                 DropSpikes();
@@ -99,7 +101,7 @@ public class IceFairy : MonoBehaviour {
 
         }
         if (waiting) {
-            if (Time.time - prewaittime > 2) {
+            if (Time.time - prewaittime > (hardMode?1.7:2)) {
                 waiting = false;
                 GoOffscreen();
             }
@@ -140,12 +142,20 @@ public class IceFairy : MonoBehaviour {
         iFrames = 1;
     }
 
-    public void Fire() {
-        int n = Random.Range(3, 10);
+    public void Shoot(){
+        int n = hardMode?Random.Range(6, 10):Random.Range(2,6);
         for (int i = 0; i < n; i++) {
             var quart = Quaternion.AngleAxis(i * (360 / n), Vector3.forward);
             GameObject.Instantiate(icicle, transform.position, quart);
         }
+    }
+
+    public void Fire() {
+        Shoot();
+        if(hardMode){
+            Invoke("Shoot", 0.7f);
+        }
+
         WaitAfterShot();
     }
 
@@ -160,7 +170,7 @@ public class IceFairy : MonoBehaviour {
             }
             isDropping = false;
             RaiseSpikes();
-            ThrowSingleIce();
+            if(hardMode) ThrowSingleIce();
         }
          if (other.gameObject.GetComponent<Player>()) {
             other.gameObject.GetComponent<Player>().SendMessage("GetDamage", 0.1f);
@@ -171,13 +181,20 @@ public class IceFairy : MonoBehaviour {
         isDropping = true;
         var quart = Quaternion.AngleAxis(-90, Vector3.forward);
         var g1 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(2, 10, 0), quart);
-        var g2 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(1, 7, 0), quart);
-        var g3 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(-1, 7, 0), quart);
         var g4 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(-2, 10, 0), quart);
         g1.transform.Rotate(new Vector3(0, 0, 20));
-        g2.transform.Rotate(new Vector3(0, 0, 10));
-        g3.transform.Rotate(new Vector3(0, 0, -10));
         g4.transform.Rotate(new Vector3(0, 0, -20));
+            var g2 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(1, 7, 0), quart);
+            var g3 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(-1, 7, 0), quart);
+            g2.transform.Rotate(new Vector3(0, 0, 10));
+            g3.transform.Rotate(new Vector3(0, 0, -10));
+
+        if(hardMode){
+            var g5 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(3, 13, 0), quart);
+            var g6 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(-3, 13, 0), quart);
+            g5.transform.Rotate(new Vector3(0, 0, 20));
+            g6.transform.Rotate(new Vector3(0, 0, -20));
+        }
         transform.SetParent(null);
     }
 
