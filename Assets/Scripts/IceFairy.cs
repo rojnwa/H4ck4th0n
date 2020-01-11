@@ -31,10 +31,10 @@ public class IceFairy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public float health = 1;
     public Slider healthUI;
-
+    private bool loweringDramatically = false;
     // Start is called before the first frame update
 
-    public void Hurt(){
+    public void Hurt(float damage){
         if(hurtable){
             iFrames = 1.5f;
             health -= 0.05f;
@@ -47,20 +47,25 @@ public class IceFairy : MonoBehaviour
        spriteRenderer=gameObject.GetComponent<SpriteRenderer>();
        originalSprite = spriteRenderer.sprite;
 
-       Fire();
-       iFrames=3;
+        DramaticIntro();
+        healthUI.gameObject.active=false;
     }
 
-    // Update is called once per frame
+    public void DramaticIntro(){
+            loweringDramatically = true;
+    }
+
     void FixedUpdate()
     {
         if(Input.GetKeyDown("space"))
-            Hurt();
+            Hurt(0);
 
         if(isDropping){
             transform.Translate(Vector3.down * dropSpeed * Time.fixedDeltaTime);
         }
-
+        if(loweringDramatically){
+            transform.Translate(Vector3.down * 2 * Time.fixedDeltaTime);
+        }
         if(spikesDropping) {
             spikeLocationParent.transform.Translate(Vector3.down * Time.fixedDeltaTime);
             if(Vector3.Distance(spikeLocationParent.transform.position, originalSpikeLoc)>spikeDistance){
@@ -70,7 +75,7 @@ public class IceFairy : MonoBehaviour
         }
 
         if(spikesRising) {
-            spikeLocationParent.transform.Translate(Vector3.up * Time.fixedDeltaTime);
+            spikeLocationParent.transform.Translate(Vector3.up *2* Time.fixedDeltaTime);
             if(Vector3.Distance(spikeLocationParent.transform.position, originalSpikeLoc)<0.1){
                 spikesRising=false;
                 RiseToShoot();
@@ -78,7 +83,7 @@ public class IceFairy : MonoBehaviour
         }
 
         if(rising){
-            transform.Translate(Vector3.up * Time.fixedDeltaTime);
+            transform.Translate(Vector3.up *2* Time.fixedDeltaTime);
             if(Vector3.Distance(preRisePos, transform.position)>4){
                 rising=false;
                 Fire();
@@ -145,6 +150,12 @@ public class IceFairy : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        if(loweringDramatically){
+            loweringDramatically=false;
+            GoOffscreen();
+            healthUI.gameObject.active=true;
+            return;
+        }
         if(other.gameObject.tag == "ground"){
             isDropping=false;
             RaiseSpikes();
