@@ -41,16 +41,11 @@ public class Enemy : MonoBehaviour {
         if (other.gameObject.GetComponent<Player>()) {
             //TODO DMG TO PLAYER
         } else {
-            ColliderDistance2D colliderDistance = other.Distance(boxCollider);
-            Vector2 v = colliderDistance.pointA - colliderDistance.pointB;
-            transform.Translate(v);
-            if (v.x != 0) {
                 if (dir == Direction.Left) {
                     dir = Direction.Right;
                 } else {
                     dir = Direction.Left;
                 }
-            }
         }
     }
     // Update is called once per frame
