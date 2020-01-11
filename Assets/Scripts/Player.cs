@@ -39,12 +39,16 @@ public class Player : MonoBehaviour {
 
         if (Input.GetButton("Left")) {
             rb2D.transform.Translate(-transform.right * speed * Time.fixedDeltaTime);
-            camHelper.transform.localPosition = new Vector3(-5, 0, 0);
+            //camHelper.transform.localPosition = new Vector3(-5, 0, 0);
+            //transform.eulerAngles = new Vector3(0, 180, 0);
+            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 180, 0), Time.fixedDeltaTime * 10);
         }
 
         if (Input.GetButton("Right")) {
             rb2D.transform.Translate(transform.right * speed * Time.fixedDeltaTime);
-            camHelper.transform.localPosition = new Vector3(5, 0, 0);
+            //camHelper.transform.localPosition = new Vector3(5, 0, 0);
+            //transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 0, 0), Time.fixedDeltaTime * 10);
         }
 
         if (Input.GetButtonDown("Fire1")) {
