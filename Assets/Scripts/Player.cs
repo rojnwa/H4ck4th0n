@@ -14,10 +14,12 @@ public class Player : MonoBehaviour {
     private float distToGround;
     private bool dropPressed;
     public CamHelper camHelper;
+    private Animator animator;
 
     void Start() {
         col2D = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         distToGround = col2D.bounds.extents.y;
     }
 
@@ -39,11 +41,17 @@ public class Player : MonoBehaviour {
             camHelper.transform.localPosition = new Vector3(5, 0, 0);
         }
 
+        if (Input.GetButton("Fire1")) {
+            animator.SetTrigger("Attack");
+        }
+
         if (Input.GetButtonDown("Jump") && (isGrounded == Grounded.Resting)) {
+            animator.SetTrigger("Jump");
             isGrounded = Grounded.Jumping;
             rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
 
             if (doubleJumpUpgradeAcquired && (isGrounded != Grounded.DoubleJumped) && Input.GetButtonDown("Jump")) {
+                animator.SetTrigger("DoubleJump");
                 isGrounded = Grounded.DoubleJumped;
                 rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             }
