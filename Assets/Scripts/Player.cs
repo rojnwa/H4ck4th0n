@@ -54,8 +54,8 @@ public class Player : MonoBehaviour {
 
     void jumpUpgradeAcquired()
     {
-        GetComponentInChildren<FireWings>().gameObject.SetActive(true);
         doubleJumpUpgradeAcquired = true;
+        GetComponentInChildren<FireWings>().gameObject.SetActive(true);
     }
 
     void ToggleSwordCollider() {
