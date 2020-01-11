@@ -11,19 +11,18 @@ public class Player : MonoBehaviour {
     private Grounded isGrounded = Grounded.Resting;
     private bool doubleJumpUpgradeAcquired;
     private bool sprintUpgradeUpgradeAcquired;
-    private float distToGround;
     private bool dropPressed;
     public CamHelper camHelper;
     private Animator animator;
     public Sword sword;
     private PolygonCollider2D swordCol;
+    private float health = 1f;
 
     void Start() {
         col2D = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         swordCol = sword.GetComponent<PolygonCollider2D>();
-        distToGround = col2D.bounds.extents.y;
     }
 
 
@@ -47,6 +46,10 @@ public class Player : MonoBehaviour {
             }
         }
 
+    }
+
+    void GetDamage(float damage) {
+        health -= damage;
     }
 
     void ToggleSwordCollider() {
