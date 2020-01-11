@@ -30,7 +30,7 @@ public class IcicleTrap : MonoBehaviour
         }
     }   
 
-    private void OnTriggerEnter2D()
+    private void OnTriggerEnter2D() 
     {
         bossfightActivated = true;
         boxCollider.enabled = true;
