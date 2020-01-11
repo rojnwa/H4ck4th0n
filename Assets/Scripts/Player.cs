@@ -34,6 +34,8 @@ public class Player : MonoBehaviour {
 
 
     void Update() {
+        if (health <= 0) SceneManager.LoadScene("Menu");
+
         if (Input.GetButtonDown("Fire1")) {
             animator.SetTrigger("Attack");
             ToggleSwordCollider();
