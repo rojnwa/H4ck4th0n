@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     private bool sprintUpgradeUpgradeAcquired;
     private float distToGround;
     private bool dropPressed;
+    public CamHelper camHelper;
 
     void Start() {
         col2D = GetComponent<Collider2D>();
@@ -30,10 +31,12 @@ public class Player : MonoBehaviour {
 
         if (Input.GetButton("Left")) {
             rb2D.transform.Translate(-transform.right * speed * Time.fixedDeltaTime);
+            camHelper.transform.localPosition = new Vector3(-5, 0, 0);
         }
 
         if (Input.GetButton("Right")) {
             rb2D.transform.Translate(transform.right * speed * Time.fixedDeltaTime);
+            camHelper.transform.localPosition = new Vector3(5, 0, 0);
         }
 
         if (Input.GetButtonDown("Jump") && (isGrounded == Grounded.Resting)) {
