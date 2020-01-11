@@ -31,6 +31,9 @@ public class Player : MonoBehaviour {
         if (PlayerPrefs.GetInt("BossKilled", 0) == 1) {
             jumpUpgradeAcquired();
         }
+        if (PlayerPrefs.GetInt("HasSprint", 0) == 1) {
+            walkUpgradeAcquired();
+        }
 
     }
 
@@ -156,11 +159,13 @@ public class Player : MonoBehaviour {
 
     void Heal(float amount) {
         health += amount;
+        health=Mathf.Clamp01(health);
     }
 
     void Teleport(string location) {
 
         PlayerPrefs.SetFloat("Health", health);
+        PlayerPrefs.SetInt("HasSprint", sprintUpgradeUpgradeAcquired?1:0);
         PlayerPrefs.Save();
         SceneManager.LoadScene(location);
     }
