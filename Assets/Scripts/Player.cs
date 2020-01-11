@@ -52,6 +52,16 @@ public class Player : MonoBehaviour {
         health -= damage;
     }
 
+    void walkUpgradeAcquired()
+    {
+        sprintUpgradeUpgradeAcquired = true;
+        Leg[] legs = GetComponentsInChildren<Leg>();
+        for(int i=0; i<legs.Length; i++)
+        {
+            legs[i].GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
+        }
+    }
+
     void jumpUpgradeAcquired()
     {
         GetComponentInChildren<FireWings>().gameObject.SetActive(true);
