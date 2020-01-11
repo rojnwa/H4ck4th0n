@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fox : MonoBehaviour
-{
+public class Fox : MonoBehaviour {
     private BoxCollider2D hitBox;
 
     private BoxCollider2D visBox;
@@ -32,8 +31,7 @@ public class Fox : MonoBehaviour
     private Random random;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         animator = transform.GetChild(0).GetComponent<Animator>();
         visBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
         hitBox = GetComponent<BoxCollider2D>();
@@ -49,27 +47,20 @@ public class Fox : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (health <= 0)
-        {
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fox - Death"))
-            {
+    void Update() {
+        if (health <= 0) {
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fox - Death")) {
                 animator.Play("Fox - Death");
                 StartCoroutine(DeathCountdown());
             }
-        }
-        else {
+        } else {
 
-            Collider2D[] vHits = Physics2D.OverlapBoxAll(transform.position, visBox.size, 0);
-            foreach (Collider2D hit in vHits)
-            {
+            Collider2D[] vHits = Physics2D.OverlapBoxAll(transform.position, visBox.size, 0, 0);
+            foreach (Collider2D hit in vHits) {
 
-                if (hit.gameObject.GetComponent<Player>() != null)
-                {
+                if (hit.gameObject.GetComponent<Player>() != null) {
                     playerIsVisible = true;
-                    if (Vector2.Distance(transform.position, hit.gameObject.transform.position) < 4.6 && Vector2.Distance(transform.position, hit.gameObject.transform.position) > 4.5 && Random.value < 0.1)
-                    {
+                    if (Vector2.Distance(transform.position, hit.gameObject.transform.position) < 4.6 && Vector2.Distance(transform.position, hit.gameObject.transform.position) > 4.5 && Random.value < 0.1) {
                         doJumpAttack = true;
                         Debug.Log("Jump");
                     }
@@ -79,15 +70,11 @@ public class Fox : MonoBehaviour
             if (!inCooldown && playerIsVisible && !triggeredWalking)
                 TriggerWalking();
 
-            if (doJumpAttack)
-            {
+            if (doJumpAttack) {
                 animator.Play("Fox - Attack 2");
-                if (dir == Direction.Left)
-                {
+                if (dir == Direction.Left) {
                     transform.position = new Vector2(transform.position.x - 2, transform.position.y);
-                }
-                else
-                {
+                } else {
                     transform.position = new Vector2(transform.position.x + 2, transform.position.y);
                 }
 
@@ -96,53 +83,39 @@ public class Fox : MonoBehaviour
                 inCooldown = true;
                 doJumpAttack = false;
                 StartCoroutine(MovementCooldown());
-            }
-            else
-            if (!inCooldown && playerIsVisible && triggeredWalking && (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fox - Attack 1") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Fox - Attack 2")))
-            {
+            } else
+            if (!inCooldown && playerIsVisible && triggeredWalking && (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fox - Attack 1") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Fox - Attack 2"))) {
 
-                if (dir == Direction.Left)
-                {
+                if (dir == Direction.Left) {
                     velocity.x = -1;
-                }
-                else
-                {
+                } else {
                     velocity.x = 1;
                 }
 
                 transform.Translate(velocity * Time.deltaTime);
 
-                Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, hitBox.size, 0);
+                Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, hitBox.size, 0, 1);
 
-                foreach (Collider2D hit in hits)
-                {
+                foreach (Collider2D hit in hits) {
                     if (hit == hitBox || hit == visBox)
                         continue;
 
                     ColliderDistance2D colliderDistance = hit.Distance(hitBox);
 
-                    if (colliderDistance.isOverlapped)
-                    {
+                    if (colliderDistance.isOverlapped) {
                         Vector2 v = colliderDistance.pointA - colliderDistance.pointB;
 
-                        if (hit.gameObject.GetComponent<Player>() == null)
-                        {
-                            if (v.x != 0)
-                            {
-                                if (dir == Direction.Left)
-                                {
+                        if (hit.gameObject.GetComponent<Player>() == null) {
+                            if (v.x != 0) {
+                                if (dir == Direction.Left) {
                                     dir = Direction.Right;
                                     transform.localScale = new Vector2(1, 1);
-                                }
-                                else
-                                {
+                                } else {
                                     dir = Direction.Left;
                                     transform.localScale = new Vector2(-1, 1);
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             animator.Play("Fox - Attack 1");
                             triggeredWalking = false;
                             inCooldown = true;
@@ -156,19 +129,16 @@ public class Fox : MonoBehaviour
         }
     }
 
-    private void TriggerWalking()
-    {
+    private void TriggerWalking() {
         animator.Play("Fox - Walking");
         triggeredWalking = true;
     }
 
-    private IEnumerator MovementCooldown()
-    {
+    private IEnumerator MovementCooldown() {
 
         float duration = 3f;
         float normalizedTime = 0;
-        while (normalizedTime <= 1f)
-        {
+        while (normalizedTime <= 1f) {
             normalizedTime += Time.deltaTime / duration;
             yield return null;
         }
@@ -177,13 +147,11 @@ public class Fox : MonoBehaviour
 
     }
 
-    private IEnumerator DeathCountdown()
-    {
+    private IEnumerator DeathCountdown() {
 
         float duration = 2f;
         float normalizedTime = 0;
-        while (normalizedTime <= 1f)
-        {
+        while (normalizedTime <= 1f) {
             normalizedTime += Time.deltaTime / duration;
             yield return null;
         }
