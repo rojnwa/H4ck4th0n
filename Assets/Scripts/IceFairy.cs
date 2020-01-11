@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IceFairy : MonoBehaviour
 {
@@ -28,25 +29,45 @@ public class IceFairy : MonoBehaviour
     private Sprite originalSprite;
     public Sprite WhiteSprite;
     private SpriteRenderer spriteRenderer;
-
+    public float health = 1;
+    public Slider healthUI;
+    private bool loweringDramatically = false;
+    public GameObject wings;
+    public GameObject wingsSpawnLocation;
     // Start is called before the first frame update
+
+    public void Hurt(float damage){
+        if(hurtable){
+            if(health <= 0){
+                Die();
+            }
+            iFrames = 1f;
+            health -= 0.033f;
+        }
+    }
+
     void Start()
     {
         originalSpikeLoc = spikeLocationParent.transform.position;
        spriteRenderer=gameObject.GetComponent<SpriteRenderer>();
        originalSprite = spriteRenderer.sprite;
 
-       Fire();
-       iFrames=3;
+        DramaticIntro();
+        healthUI.gameObject.active=false;
     }
 
-    // Update is called once per frame
+    public void DramaticIntro(){
+            loweringDramatically = true;
+    }
+
     void FixedUpdate()
     {
         if(isDropping){
             transform.Translate(Vector3.down * dropSpeed * Time.fixedDeltaTime);
         }
-
+        if(loweringDramatically){
+            transform.Translate(Vector3.down * 2 * Time.fixedDeltaTime);
+        }
         if(spikesDropping) {
             spikeLocationParent.transform.Translate(Vector3.down * Time.fixedDeltaTime);
             if(Vector3.Distance(spikeLocationParent.transform.position, originalSpikeLoc)>spikeDistance){
@@ -56,7 +77,7 @@ public class IceFairy : MonoBehaviour
         }
 
         if(spikesRising) {
-            spikeLocationParent.transform.Translate(Vector3.up * Time.fixedDeltaTime);
+            spikeLocationParent.transform.Translate(Vector3.up *2* Time.fixedDeltaTime);
             if(Vector3.Distance(spikeLocationParent.transform.position, originalSpikeLoc)<0.1){
                 spikesRising=false;
                 RiseToShoot();
@@ -64,7 +85,7 @@ public class IceFairy : MonoBehaviour
         }
 
         if(rising){
-            transform.Translate(Vector3.up * Time.fixedDeltaTime);
+            transform.Translate(Vector3.up *2* Time.fixedDeltaTime);
             if(Vector3.Distance(preRisePos, transform.position)>4){
                 rising=false;
                 Fire();
@@ -89,7 +110,13 @@ public class IceFairy : MonoBehaviour
 
         if (iFrames > 0){
             iFrames -= Time.fixedDeltaTime;
-        } 
+            hurtable = false;
+        } else {
+            hurtable = true;
+            ResetMaterial();
+        }
+
+        healthUI.value = health;
     }
 
     void ResetMaterial() {
@@ -125,9 +152,17 @@ public class IceFairy : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.tag == "ground"){
+        if(other.gameObject.GetComponent<GroundScript>()){
+            if (loweringDramatically) {
+                loweringDramatically = false;
+                GoOffscreen();
+                healthUI.gameObject.SetActive(true);
+                preRisePos=transform.position;
+                return;
+            }
             isDropping=false;
             RaiseSpikes();
+            ThrowSingleIce();
         }
     }
 
@@ -138,10 +173,10 @@ public class IceFairy : MonoBehaviour
         var g2 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(1, 7, 0), quart);
         var g3 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(-1, 7, 0), quart);
         var g4 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(-2, 10, 0), quart);
-        g1.transform.Rotate(new Vector3(0, 0, 40));
+        g1.transform.Rotate(new Vector3(0, 0, 20));
         g2.transform.Rotate(new Vector3(0, 0, 10));
         g3.transform.Rotate(new Vector3(0, 0, -10));
-        g4.transform.Rotate(new Vector3(0, 0, -40));
+        g4.transform.Rotate(new Vector3(0, 0, -20));
         transform.SetParent(null);
     }
 
@@ -174,4 +209,22 @@ public class IceFairy : MonoBehaviour
        waiting = true;
     }
 
+    public void ThrowSingleIce(){
+            var ice = GameObject.Instantiate(icicleStraight, transform.position,Quaternion.identity);
+            var player = Object.FindObjectOfType<Player>().gameObject;
+            var playerPos = player.transform;
+            ice.transform.LookAt(playerPos,Vector3.up);
+            ice.transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+    }
+
+    public void Die(){
+        var rb = GetComponent<Rigidbody2D>();
+        rb.constraints=RigidbodyConstraints2D.None;
+        rb.AddForce(Vector2.up*200);
+        healthUI.gameObject.SetActive(false);
+        rb.AddTorque(800);
+        this.enabled=false;
+        this.GetComponent<Collider2D>().isTrigger=true;
+        Instantiate(wings, wingsSpawnLocation.transform.position, Quaternion.identity);
+    }
 }

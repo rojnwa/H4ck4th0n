@@ -21,7 +21,7 @@ public class IcicleTrap : MonoBehaviour
         {
             if(transform.position.y > -1.7f)
             {
-                transform.Translate(new Vector3(0, -1.7f,0)*Time.fixedDeltaTime);
+                transform.Translate(new Vector3(0, -22f,0)*Time.fixedDeltaTime);
             } else
             {
                 bossfightActivated = false;

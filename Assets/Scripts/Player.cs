@@ -11,45 +11,22 @@ public class Player : MonoBehaviour {
     private Grounded isGrounded = Grounded.Resting;
     private bool doubleJumpUpgradeAcquired;
     private bool sprintUpgradeUpgradeAcquired;
-    private float distToGround;
     private bool dropPressed;
     public CamHelper camHelper;
     private Animator animator;
     public Sword sword;
     private PolygonCollider2D swordCol;
+    private float health = 1f;
 
     void Start() {
         col2D = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         swordCol = sword.GetComponent<PolygonCollider2D>();
-        distToGround = col2D.bounds.extents.y;
     }
 
 
     void Update() {
-
-    }
-
-    void ToggleSwordCollider() {
-        swordCol.enabled = !swordCol.enabled;
-    }
-
-    void FixedUpdate() {
-
-        if (Input.GetButton("Left")) {
-            rb2D.transform.Translate(-transform.right * speed * Time.fixedDeltaTime);
-            //camHelper.transform.localPosition = new Vector3(-5, 0, 0);
-            //transform.eulerAngles = new Vector3(0, 180, 0);
-            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 180, 0), Time.fixedDeltaTime * 10);
-        }
-
-        if (Input.GetButton("Right")) {
-            rb2D.transform.Translate(transform.right * speed * Time.fixedDeltaTime);
-            //camHelper.transform.localPosition = new Vector3(5, 0, 0);
-            //transform.eulerAngles = new Vector3(0, 0, 0);
-            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 0, 0), Time.fixedDeltaTime * 10);
-        }
 
         if (Input.GetButtonDown("Fire1")) {
             animator.SetTrigger("Attack");
@@ -67,6 +44,39 @@ public class Player : MonoBehaviour {
                 isGrounded = Grounded.DoubleJumped;
                 rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             }
+        }
+
+    }
+
+    void GetDamage(float damage) {
+        health -= damage;
+    }
+
+    void jumpUpgradeAcquired()
+    {
+        GetComponentInChildren<FireWings>().gameObject.SetActive(true);
+        doubleJumpUpgradeAcquired = true;
+    }
+
+    void ToggleSwordCollider() {
+        swordCol.enabled = !swordCol.enabled;
+    }
+
+    void FixedUpdate() {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
+        if (Input.GetButton("Left")) {
+            rb2D.transform.Translate(-transform.right * speed * Time.fixedDeltaTime);
+            //camHelper.transform.localPosition = new Vector3(-5, 0, 0);
+            //transform.eulerAngles = new Vector3(0, 180, 0);
+            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 180, 0), Time.fixedDeltaTime * 10);
+        }
+
+        if (Input.GetButton("Right")) {
+            rb2D.transform.Translate(transform.right * speed * Time.fixedDeltaTime);
+            //camHelper.transform.localPosition = new Vector3(5, 0, 0);
+            //transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 0, 0), Time.fixedDeltaTime * 10);
         }
 
         speed *= (Input.GetButton("Sprint") && sprintUpgradeUpgradeAcquired) ? 2 : 1;

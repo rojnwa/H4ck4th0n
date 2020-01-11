@@ -52,21 +52,21 @@ public class Fox : MonoBehaviour
         if (other.gameObject.GetComponent<Player>() == null && other.gameObject.GetComponent<Sword>() == null)
         {
             Debug.Log("Change");
-                if (dir == Direction.Left)
-                {
-                    dir = Direction.Right;
-                    transform.localScale = new Vector2(1, 1);
+            if (dir == Direction.Left)
+            {
+                dir = Direction.Right;
+                transform.localScale = new Vector2(1, 1);
                 Debug.Log("Rotate");
-                }
-                else
-                {
-                    dir = Direction.Left;
-                    transform.localScale = new Vector2(-1, 1);
-                }
+            }
+            else
+            {
+                dir = Direction.Left;
+                transform.localScale = new Vector2(-1, 1);
+            }
         }
         else if (!inCooldown)
         {
-            animator.Play("Fox - Attack " + (int)Random.Range(1,3));
+            animator.Play("Fox - Attack " + (int)Random.Range(1, 3));
             triggeredWalking = false;
             StartCoroutine(MovementCooldown());
         }
@@ -86,7 +86,7 @@ public class Fox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health <= 0)
+        if (health <= 0)
         {
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fox - Death"))
             {
@@ -103,7 +103,7 @@ public class Fox : MonoBehaviour
             velocity.x = 1;
         }
 
-        if(!walking || !triggeredWalking)
+        if (!walking || !triggeredWalking)
             velocity.x = 0;
 
         transform.Translate(velocity * Time.deltaTime);

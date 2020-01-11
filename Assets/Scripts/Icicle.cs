@@ -14,13 +14,13 @@ public class Icicle : MonoBehaviour
     private Transform playerPos;
     private Quaternion originalRotation;
 
-
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         startTime = Time.time;
         originalRotation = transform.rotation;
+       Destroy(this.gameObject, 10);
     }
 
     // Update is called once per frame
