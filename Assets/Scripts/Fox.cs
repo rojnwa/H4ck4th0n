@@ -27,7 +27,7 @@ public class Fox : MonoBehaviour
 
     private bool playerIsVisible;
 
-    private bool triggeredWalking, inCooldown, doJumpAttack, walking, inCd;
+    private bool triggeredWalking, inCooldown, anPlayed, walking, inCd;
 
     private Random random;
 
@@ -42,6 +42,7 @@ public class Fox : MonoBehaviour
         inCooldown = false;
         triggeredWalking = false;
         inCd = false;
+        anPlayed = false;
         if (dir == Direction.Left)
             transform.localScale = new Vector2(-1, 1);
         random = new Random();
@@ -51,12 +52,10 @@ public class Fox : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Player>() == null && other.gameObject.GetComponent<Sword>() == null)
         {
-            Debug.Log("Change");
             if (dir == Direction.Left)
             {
                 dir = Direction.Right;
                 transform.localScale = new Vector2(1, 1);
-                Debug.Log("Rotate");
             }
             else
             {
@@ -64,17 +63,14 @@ public class Fox : MonoBehaviour
                 transform.localScale = new Vector2(-1, 1);
             }
         }
-        else if (!inCooldown)
-        {
-            animator.Play("Fox - Attack " + (int)Random.Range(1, 3));
-            triggeredWalking = false;
-            StartCoroutine(MovementCooldown());
-        }
-    }
+        else if (other.gameObject.GetComponent<Sword>() != null) {
+            if(other.transform.rotation.z != 0)
+            {
+                health -= 5;
+            }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.GetComponent<Player>() != null && !inCooldown)
+        }
+        else if (!inCooldown)
         {
             animator.Play("Fox - Attack " + (int)Random.Range(1, 3));
             triggeredWalking = false;
@@ -88,10 +84,13 @@ public class Fox : MonoBehaviour
     {
         if (health <= 0)
         {
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Fox - Death"))
+            if (!anPlayed)
             {
+                Debug.Log("death");
                 animator.Play("Fox - Death");
                 StartCoroutine(DeathCountdown());
+                walking = false;
+                anPlayed = true;
             }
         }
         if (dir == Direction.Left)
@@ -164,7 +163,7 @@ public class Fox : MonoBehaviour
     private IEnumerator DeathCountdown()
     {
 
-        float duration = 2f;
+        float duration = 1.5f;
         float normalizedTime = 0;
         while (normalizedTime <= 1f)
         {
