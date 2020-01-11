@@ -4006,6 +4006,31 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3667079053098525314, guid: d1b2c7ae348763e4a87bf5545eab37e4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3667079053098525314, guid: d1b2c7ae348763e4a87bf5545eab37e4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3667079053512604393, guid: d1b2c7ae348763e4a87bf5545eab37e4,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3667079053512604393, guid: d1b2c7ae348763e4a87bf5545eab37e4,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1366
+      objectReference: {fileID: 0}
+    - target: {fileID: 3667079053512604393, guid: d1b2c7ae348763e4a87bf5545eab37e4,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 768
+      objectReference: {fileID: 0}
     - target: {fileID: 3667079053512604398, guid: d1b2c7ae348763e4a87bf5545eab37e4,
         type: 3}
       propertyPath: m_RenderMode
