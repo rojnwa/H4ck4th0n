@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
     private Rigidbody2D rb2D;
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour {
 
         if (doubleJumpUpgradeAcquired && (isGrounded == Grounded.Jumping) && Input.GetButtonDown("Jump")) {
             isGrounded = Grounded.DoubleJumped;
-            rb2D.velocity=Vector2.zero;
+            rb2D.velocity = Vector2.zero;
             rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             animator.SetTrigger("DoubleJump");
         }
@@ -56,11 +57,10 @@ public class Player : MonoBehaviour {
         health -= damage;
     }
 
-    void jumpUpgradeAcquired()
-    {
+    void jumpUpgradeAcquired() {
         doubleJumpUpgradeAcquired = true;
         var fireWingsGameObject = GetComponentInChildren<FireWings>().gameObject;
-        fireWingsGameObject.transform.localScale=fireWingsGameObject.GetComponent<FireWings>().oScale;
+        fireWingsGameObject.transform.localScale = fireWingsGameObject.GetComponent<FireWings>().oScale;
     }
 
     void ToggleSwordCollider() {
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour {
             transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 0, 0), Time.fixedDeltaTime * 10);
         }
 
-        speed *= (Input.GetButton("Sprint") && sprintUpgradeUpgradeAcquired) ? 2 : 1;
+        speed = (Input.GetButton("Sprint") && sprintUpgradeUpgradeAcquired) ? 10 : 5;
 
     }
 
@@ -105,6 +105,10 @@ public class Player : MonoBehaviour {
 
     void DropThrough() {
         col2D.enabled = !col2D.enabled;
+    }
+
+    void Teleport(string location) {
+        SceneManager.LoadScene(location);
     }
 
     void resetGrounded() {
