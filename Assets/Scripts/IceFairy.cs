@@ -52,7 +52,6 @@ public class IceFairy : MonoBehaviour {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         originalSprite = spriteRenderer.sprite;
 
-        DramaticIntro();
         healthUI.gameObject.active = false;
     }
 
