@@ -1,16 +1,25 @@
 fileFormatVersion: 2
-guid: 798f744f481c97a4c845e29424660213
+guid: edadac17bc5362642931890b3d914312
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5254428562285626820
-    second: '!$Goken_0'
+      213: -5435178082633963851
+    second: Fox attack 2_0
   - first:
-      213: -306445556211184710
-    second: '!$Goken_1'
+      213: 510837249644109293
+    second: Fox attack 2_1
   - first:
-      213: 4157225325290083042
-    second: '!$Goken_2'
+      213: 3952164362720611610
+    second: Fox attack 2_2
+  - first:
+      213: 4751534625609264325
+    second: Fox attack 2_3
+  - first:
+      213: 5987210863786196540
+    second: Fox attack 2_4
+  - first:
+      213: 7191956357606095126
+    second: Fox attack 2_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -90,18 +99,18 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: '!$Goken_0'
+      name: Fox attack 2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
+        x: 2
+        y: 158
+        width: 78
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -109,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 097cdc684ad927d419da1fa443fdd31a
-      internalID: -5254428562285626820
+      spriteID: c590b410dc6df7048ada00bd44e8b211
+      internalID: -5435178082633963851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!$Goken_1'
+      name: Fox attack 2_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
+        x: 84
+        y: 158
+        width: 78
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae6f7183e873fcc4fa675ac74a140061
-      internalID: -306445556211184710
+      spriteID: 43fd2f14bf1bc9441938014530d6db89
+      internalID: 510837249644109293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!$Goken_2'
+      name: Fox attack 2_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
+        x: 166
+        y: 158
+        width: 78
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,8 +160,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c74459a09d8331d46bfa9a8cd43725fd
-      internalID: 4157225325290083042
+      spriteID: 321e928b454178a47b596409a03f91c9
+      internalID: 3952164362720611610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fox attack 2_3
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 158
+        width: 103
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a505b4574bffc44bc268523bcf9f1b
+      internalID: 4751534625609264325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fox attack 2_4
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 158
+        width: 98
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35177f6a1af72740a155b5dada2b4b5
+      internalID: 5987210863786196540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fox attack 2_5
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 158
+        width: 91
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af54736e60222fa4c8faa2998dab9bea
+      internalID: 7191956357606095126
       vertices: []
       indices: 
       edges: []
@@ -160,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: af5a9ff3c4232824ab8e0ab1c9c1c348
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

@@ -13,10 +13,16 @@ public class Player : MonoBehaviour {
     private bool sprintUpgradeUpgradeAcquired;
     private float distToGround;
     private bool dropPressed;
+    public CamHelper camHelper;
+    private Animator animator;
+    public Sword sword;
+    private PolygonCollider2D swordCol;
 
     void Start() {
         col2D = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        swordCol = sword.GetComponent<PolygonCollider2D>();
         distToGround = col2D.bounds.extents.y;
     }
 
@@ -25,22 +31,39 @@ public class Player : MonoBehaviour {
 
     }
 
+    void ToggleSwordCollider() {
+        swordCol.enabled = !swordCol.enabled;
+    }
 
     void FixedUpdate() {
 
         if (Input.GetButton("Left")) {
             rb2D.transform.Translate(-transform.right * speed * Time.fixedDeltaTime);
+            //camHelper.transform.localPosition = new Vector3(-5, 0, 0);
+            //transform.eulerAngles = new Vector3(0, 180, 0);
+            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 180, 0), Time.fixedDeltaTime * 10);
         }
 
         if (Input.GetButton("Right")) {
             rb2D.transform.Translate(transform.right * speed * Time.fixedDeltaTime);
+            //camHelper.transform.localPosition = new Vector3(5, 0, 0);
+            //transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 0, 0), Time.fixedDeltaTime * 10);
+        }
+
+        if (Input.GetButtonDown("Fire1")) {
+            animator.SetTrigger("Attack");
+            ToggleSwordCollider();
+            Invoke("ToggleSwordCollider", 0.3f);
         }
 
         if (Input.GetButtonDown("Jump") && (isGrounded == Grounded.Resting)) {
+            animator.SetTrigger("Jump");
             isGrounded = Grounded.Jumping;
             rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
 
             if (doubleJumpUpgradeAcquired && (isGrounded != Grounded.DoubleJumped) && Input.GetButtonDown("Jump")) {
+                animator.SetTrigger("DoubleJump");
                 isGrounded = Grounded.DoubleJumped;
                 rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             }

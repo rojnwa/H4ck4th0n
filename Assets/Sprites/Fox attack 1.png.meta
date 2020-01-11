@@ -1,16 +1,22 @@
 fileFormatVersion: 2
-guid: 798f744f481c97a4c845e29424660213
+guid: 3037779b9ec44fe499073eb13f843e99
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5254428562285626820
-    second: '!$Goken_0'
+      213: -8649764206331680491
+    second: Fox attack 1_0
   - first:
-      213: -306445556211184710
-    second: '!$Goken_1'
+      213: 4727196016359626395
+    second: Fox attack 1_1
   - first:
-      213: 4157225325290083042
-    second: '!$Goken_2'
+      213: 1404402427367074571
+    second: Fox attack 1_2
+  - first:
+      213: -4974465748313592270
+    second: Fox attack 1_3
+  - first:
+      213: 8001006037102766364
+    second: Fox attack 1_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -90,69 +96,111 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: '!$Goken_0'
+      name: Fox attack 1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
+        x: 2
+        y: 226
+        width: 78
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 097cdc684ad927d419da1fa443fdd31a
-      internalID: -5254428562285626820
+      spriteID: 6c015f8d8ac4f5f48a58ffaac01fcff6
+      internalID: -8649764206331680491
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!$Goken_1'
+      name: Fox attack 1_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
+        x: 84
+        y: 226
+        width: 78
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae6f7183e873fcc4fa675ac74a140061
-      internalID: -306445556211184710
+      spriteID: 8c8c7136423692a47b077f57cc746f9e
+      internalID: 4727196016359626395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!$Goken_2'
+      name: Fox attack 1_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
+        x: 166
+        y: 226
+        width: 91
+        height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c74459a09d8331d46bfa9a8cd43725fd
-      internalID: 4157225325290083042
+      spriteID: f7569c2026df7df488be6ca22dbe5754
+      internalID: 1404402427367074571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fox attack 1_3
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 226
+        width: 97
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e28e37761dfe33847bf1875d27191df1
+      internalID: -4974465748313592270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fox attack 1_4
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 226
+        width: 91
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb1a334dbfc307f41abeb7a9360a9dec
+      internalID: 8001006037102766364
       vertices: []
       indices: 
       edges: []
@@ -160,7 +208,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: af5a9ff3c4232824ab8e0ab1c9c1c348
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

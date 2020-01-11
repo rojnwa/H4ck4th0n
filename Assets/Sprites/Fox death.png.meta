@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: 798f744f481c97a4c845e29424660213
+guid: f2fa54d91e302ae4c95bcbe5564c6abd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5254428562285626820
-    second: '!$Goken_0'
+      213: -1050842779034439701
+    second: Fox death_0
   - first:
-      213: -306445556211184710
-    second: '!$Goken_1'
-  - first:
-      213: 4157225325290083042
-    second: '!$Goken_2'
+      213: -4479779606626618461
+    second: Fox death_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -90,18 +87,18 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: '!$Goken_0'
+      name: Fox death_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
+        x: 2
+        y: 106
+        width: 77
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -109,20 +106,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 097cdc684ad927d419da1fa443fdd31a
-      internalID: -5254428562285626820
+      spriteID: 693117b7cd3e3724a9032f05effe6755
+      internalID: -1050842779034439701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '!$Goken_1'
+      name: Fox death_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
+        x: 2
+        y: 62
+        width: 85
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,29 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae6f7183e873fcc4fa675ac74a140061
-      internalID: -306445556211184710
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: '!$Goken_2'
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c74459a09d8331d46bfa9a8cd43725fd
-      internalID: 4157225325290083042
+      spriteID: f9197d0c03cd14947a9cb24cd15ae1ec
+      internalID: -4479779606626618461
       vertices: []
       indices: 
       edges: []
@@ -160,7 +136,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: af5a9ff3c4232824ab8e0ab1c9c1c348
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
