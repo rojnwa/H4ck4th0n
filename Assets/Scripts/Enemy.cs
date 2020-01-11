@@ -38,23 +38,24 @@ public class Enemy : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.GetComponent<Player>()) {
+        if (other.gameObject.GetComponent<Player>() != null) {
             //TODO DMG TO PLAYER
+        } else if (other.gameObject.GetComponent<Sword>() != null) {
+            health -= 5;
         } else {
-            ColliderDistance2D colliderDistance = other.Distance(boxCollider);
-            Vector2 v = colliderDistance.pointA - colliderDistance.pointB;
-            transform.Translate(v);
-            if (v.x != 0) {
                 if (dir == Direction.Left) {
                     dir = Direction.Right;
                 } else {
                     dir = Direction.Left;
                 }
-            }
         }
     }
     // Update is called once per frame
     void Update() {
+
+        if (health <= 0)
+            Destroy(gameObject);
+
         if (dir == Direction.Left) {
             velocity.x = -1;
         } else {
