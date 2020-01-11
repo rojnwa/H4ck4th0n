@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Icicle : MonoBehaviour
-{
+public class Icicle : MonoBehaviour {
     public float timeToGetPosition;
     public float timeToPause;
     public float positionSpeed;
@@ -15,38 +14,41 @@ public class Icicle : MonoBehaviour
     private Quaternion originalRotation;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         rb = gameObject.GetComponent<Rigidbody2D>();
         startTime = Time.time;
         originalRotation = transform.rotation;
-       Destroy(this.gameObject, 10);
+        Destroy(this.gameObject, 10);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.GetComponent<Player>()) {
+            other.gameObject.GetComponent<Player>().SendMessage("GetDamage", 0.1f);
+        }
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        if(Time.time < startTime + timeToGetPosition){
+    void FixedUpdate() {
+        if (Time.time < startTime + timeToGetPosition) {
             transform.Translate(Vector3.right * positionSpeed * Time.fixedDeltaTime);
         }
 
-        if (Time.time > startTime + timeToGetPosition && Time.time < startTime + timeToGetPosition + timeToPause)
-        {
+        if (Time.time > startTime + timeToGetPosition && Time.time < startTime + timeToGetPosition + timeToPause) {
             var player = Object.FindObjectOfType<Player>().gameObject;
             playerPos = player.transform;
-            transform.LookAt(playerPos,Vector3.up);
+            transform.LookAt(playerPos, Vector3.up);
             transform.Rotate(new Vector3(0, -90, 0), Space.Self);
             var targetRotation = transform.rotation;
-            var begintime = startTime + timeToGetPosition; 
+            var begintime = startTime + timeToGetPosition;
             var endtime = begintime + timeToPause;
             var v = Time.time - begintime / timeToPause;
             var lerpprogress = Mathf.Clamp(v, 0, 1);
             transform.rotation = Quaternion.Lerp(originalRotation, targetRotation, lerpprogress);
         }
-        
-        if(Time.time > startTime+timeToGetPosition+timeToPause) {
-            transform.Translate(Vector3.right*speed*Time.fixedDeltaTime);
+
+        if (Time.time > startTime + timeToGetPosition + timeToPause) {
+            transform.Translate(Vector3.right * speed * Time.fixedDeltaTime);
         }
-        
+
     }
 }

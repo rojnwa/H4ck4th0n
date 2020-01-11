@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IceFairy : MonoBehaviour
-{
+public class IceFairy : MonoBehaviour {
     public bool active = false;
     public GameObject[] spikeSpawnLocations;
     public GameObject spikeLocationParent;
@@ -37,80 +36,78 @@ public class IceFairy : MonoBehaviour
     public bool isDead;
     // Start is called before the first frame update
 
-    public void Hurt(float damage){
-        if(hurtable){
-            if(health <= 0 && !isDead){
+    public void Hurt(float damage) {
+        if (hurtable) {
+            if (health <= 0 && !isDead) {
                 Die();
-                isDead=true;
+                isDead = true;
             }
             iFrames = 1f;
             health -= 10.033f;
         }
     }
 
-    void Start()
-    {
+    void Start() {
         originalSpikeLoc = spikeLocationParent.transform.position;
-       spriteRenderer=gameObject.GetComponent<SpriteRenderer>();
-       originalSprite = spriteRenderer.sprite;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        originalSprite = spriteRenderer.sprite;
 
         DramaticIntro();
-        healthUI.gameObject.active=false;
+        healthUI.gameObject.active = false;
     }
 
-    public void DramaticIntro(){
-            loweringDramatically = true;
+    public void DramaticIntro() {
+        loweringDramatically = true;
     }
 
-    void FixedUpdate()
-    {
-        if(isDropping){
+    void FixedUpdate() {
+        if (isDropping) {
             transform.Translate(Vector3.down * dropSpeed * Time.fixedDeltaTime);
         }
-        if(loweringDramatically){
+        if (loweringDramatically) {
             transform.Translate(Vector3.down * 2 * Time.fixedDeltaTime);
         }
-        if(spikesDropping) {
+        if (spikesDropping) {
             spikeLocationParent.transform.Translate(Vector3.down * Time.fixedDeltaTime);
-            if(Vector3.Distance(spikeLocationParent.transform.position, originalSpikeLoc)>spikeDistance){
-                spikesDropping=false;
+            if (Vector3.Distance(spikeLocationParent.transform.position, originalSpikeLoc) > spikeDistance) {
+                spikesDropping = false;
                 Drop();
             }
         }
 
-        if(spikesRising) {
-            spikeLocationParent.transform.Translate(Vector3.up *2* Time.fixedDeltaTime);
-            if(Vector3.Distance(spikeLocationParent.transform.position, originalSpikeLoc)<0.1){
-                spikesRising=false;
+        if (spikesRising) {
+            spikeLocationParent.transform.Translate(Vector3.up * 2 * Time.fixedDeltaTime);
+            if (Vector3.Distance(spikeLocationParent.transform.position, originalSpikeLoc) < 0.1) {
+                spikesRising = false;
                 RiseToShoot();
             }
         }
 
-        if(rising){
-            transform.Translate(Vector3.up *2* Time.fixedDeltaTime);
-            if(Vector3.Distance(preRisePos, transform.position)>4){
-                rising=false;
+        if (rising) {
+            transform.Translate(Vector3.up * 2 * Time.fixedDeltaTime);
+            if (Vector3.Distance(preRisePos, transform.position) > 4) {
+                rising = false;
                 Fire();
             }
         }
 
-        if(risingOffscreen){
-            transform.Translate(Vector3.up *20* Time.fixedDeltaTime);
-            if(Vector3.Distance(preRisePos, transform.position)>30){
-                risingOffscreen=false;
+        if (risingOffscreen) {
+            transform.Translate(Vector3.up * 20 * Time.fixedDeltaTime);
+            if (Vector3.Distance(preRisePos, transform.position) > 30) {
+                risingOffscreen = false;
                 DropSpikes();
             }
 
         }
-        if(waiting){
-            if(Time.time - prewaittime>2){
-                waiting=false;
+        if (waiting) {
+            if (Time.time - prewaittime > 2) {
+                waiting = false;
                 GoOffscreen();
             }
 
         }
 
-        if (iFrames > 0){
+        if (iFrames > 0) {
             iFrames -= Time.fixedDeltaTime;
             hurtable = false;
         } else {
@@ -125,15 +122,15 @@ public class IceFairy : MonoBehaviour
         spriteRenderer.sprite = originalSprite;
     }
 
-    public void Update(){
-        if(iFrames > 0){
+    public void Update() {
+        if (iFrames > 0) {
             FlashMaterial();
         }
     }
 
     void FlashMaterial() {
         float flashtime = 0.08333f;
-        if(Time.time%flashtime < flashtime/2 ) {
+        if (Time.time % flashtime < flashtime / 2) {
             spriteRenderer.sprite = WhiteSprite;
         } else {
             spriteRenderer.sprite = originalSprite;
@@ -146,23 +143,23 @@ public class IceFairy : MonoBehaviour
 
     public void Fire() {
         int n = Random.Range(3, 10);
-        for(int i=0; i<n;i++) {
-            var quart = Quaternion.AngleAxis(i*(360/n), Vector3.forward);
-            GameObject.Instantiate(icicle, transform.position,quart);
+        for (int i = 0; i < n; i++) {
+            var quart = Quaternion.AngleAxis(i * (360 / n), Vector3.forward);
+            GameObject.Instantiate(icicle, transform.position, quart);
         }
         WaitAfterShot();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.GetComponent<GroundScript>()){
+        if (other.gameObject.GetComponent<GroundScript>()) {
             if (loweringDramatically) {
                 loweringDramatically = false;
                 GoOffscreen();
                 healthUI.gameObject.SetActive(true);
-                preRisePos=transform.position;
+                preRisePos = transform.position;
                 return;
             }
-            isDropping=false;
+            isDropping = false;
             RaiseSpikes();
             ThrowSingleIce();
         }
@@ -188,45 +185,47 @@ public class IceFairy : MonoBehaviour
         transform.SetParent(spikeLocationParent.transform);
     }
 
-    public void DropSpikes(){
+    public void DropSpikes() {
         spikesDropping = true;
         Teleport();
     }
 
-    public void RaiseSpikes(){
+    public void RaiseSpikes() {
         spikesRising = true;
     }
 
     public void RiseToShoot() {
-        preRisePos=transform.position;
-        rising=true;
+        preRisePos = transform.position;
+        rising = true;
     }
 
     public void GoOffscreen() {
-        risingOffscreen=true;
+        risingOffscreen = true;
     }
 
     public void WaitAfterShot() {
-       prewaittime=Time.time;
-       waiting = true;
+        prewaittime = Time.time;
+        waiting = true;
     }
 
-    public void ThrowSingleIce(){
-            var ice = GameObject.Instantiate(icicleStraight, transform.position,Quaternion.identity);
-            var player = Object.FindObjectOfType<Player>().gameObject;
-            var playerPos = player.transform;
-            ice.transform.LookAt(playerPos,Vector3.up);
-            ice.transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+    public void ThrowSingleIce() {
+        var ice = GameObject.Instantiate(icicleStraight, transform.position, Quaternion.identity);
+        var player = Object.FindObjectOfType<Player>().gameObject;
+        var playerPos = player.transform;
+        ice.transform.LookAt(playerPos, Vector3.up);
+        ice.transform.Rotate(new Vector3(0, -90, 0), Space.Self);
     }
 
-    public void Die(){
+    public void Die() {
         var rb = GetComponent<Rigidbody2D>();
-        rb.constraints=RigidbodyConstraints2D.None;
-        rb.AddForce(Vector2.up*200);
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.AddForce(Vector2.up * 200);
         healthUI.gameObject.SetActive(false);
         rb.AddTorque(800);
-        this.enabled=false;
-        this.GetComponent<Collider2D>().isTrigger=true;
+        this.enabled = false;
+        this.GetComponent<Collider2D>().isTrigger = true;
         Instantiate(wings, wingsSpawnLocation.transform.position, Quaternion.identity);
+        PlayerPrefs.SetInt("BossKilled", 1);
+        PlayerPrefs.Save();
     }
 }
