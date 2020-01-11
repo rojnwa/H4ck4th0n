@@ -32,6 +32,8 @@ public class IceFairy : MonoBehaviour
     public float health = 1;
     public Slider healthUI;
     private bool loweringDramatically = false;
+    public GameObject wings;
+    public GameObject wingsSpawnLocation;
     // Start is called before the first frame update
 
     public void Hurt(float damage){
@@ -39,8 +41,8 @@ public class IceFairy : MonoBehaviour
             if(health <= 0){
                 Die();
             }
-            iFrames = 1.5f;
-            health -= 0.4f;
+            iFrames = 1f;
+            health -= 0.033f;
         }
     }
 
@@ -223,5 +225,6 @@ public class IceFairy : MonoBehaviour
         rb.AddTorque(800);
         this.enabled=false;
         this.GetComponent<Collider2D>().isTrigger=true;
+        Instantiate(wings, wingsSpawnLocation.transform.position, Quaternion.identity);
     }
 }
