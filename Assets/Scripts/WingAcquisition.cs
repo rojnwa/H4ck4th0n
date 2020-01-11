@@ -9,6 +9,10 @@ public class WingAcquisition : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>())
         {
             collision.gameObject.SendMessage("jumpUpgradeAcquired");
+            Destroy(this.gameObject,0);
+        }
+        if (collision.gameObject.GetComponent<GroundScript>()){
+            GetComponent<Rigidbody2D>().constraints=RigidbodyConstraints2D.FreezeAll;
         }
     }
 }

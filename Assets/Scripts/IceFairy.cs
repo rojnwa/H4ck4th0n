@@ -34,15 +34,17 @@ public class IceFairy : MonoBehaviour
     private bool loweringDramatically = false;
     public GameObject wings;
     public GameObject wingsSpawnLocation;
+    public bool isDead;
     // Start is called before the first frame update
 
     public void Hurt(float damage){
         if(hurtable){
-            if(health <= 0){
+            if(health <= 0 && !isDead){
                 Die();
+                isDead=true;
             }
             iFrames = 1f;
-            health -= 0.033f;
+            health -= 10.033f;
         }
     }
 
