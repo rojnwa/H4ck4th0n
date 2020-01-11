@@ -6,8 +6,8 @@ public class IcicleStraight : MonoBehaviour
 {
     public float speed;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
+       Destroy(this.gameObject, 10);
         
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IceFairy : MonoBehaviour
 {
@@ -28,8 +29,18 @@ public class IceFairy : MonoBehaviour
     private Sprite originalSprite;
     public Sprite WhiteSprite;
     private SpriteRenderer spriteRenderer;
+    public float health = 1;
+    public Slider healthUI;
 
     // Start is called before the first frame update
+
+    public void Hurt(){
+        if(hurtable){
+            iFrames = 1.5f;
+            health -= 0.05f;
+        }
+    }
+
     void Start()
     {
         originalSpikeLoc = spikeLocationParent.transform.position;
@@ -43,6 +54,9 @@ public class IceFairy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(Input.GetKeyDown("space"))
+            Hurt();
+
         if(isDropping){
             transform.Translate(Vector3.down * dropSpeed * Time.fixedDeltaTime);
         }
@@ -89,7 +103,13 @@ public class IceFairy : MonoBehaviour
 
         if (iFrames > 0){
             iFrames -= Time.fixedDeltaTime;
-        } 
+            hurtable = false;
+        } else {
+            hurtable = true;
+            ResetMaterial();
+        }
+
+        healthUI.value = health;
     }
 
     void ResetMaterial() {
@@ -128,6 +148,7 @@ public class IceFairy : MonoBehaviour
         if(other.gameObject.tag == "ground"){
             isDropping=false;
             RaiseSpikes();
+            ThrowSingleIce();
         }
     }
 
@@ -138,10 +159,10 @@ public class IceFairy : MonoBehaviour
         var g2 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(1, 7, 0), quart);
         var g3 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(-1, 7, 0), quart);
         var g4 = GameObject.Instantiate(icicleStraight, transform.position + new Vector3(-2, 10, 0), quart);
-        g1.transform.Rotate(new Vector3(0, 0, 40));
+        g1.transform.Rotate(new Vector3(0, 0, 20));
         g2.transform.Rotate(new Vector3(0, 0, 10));
         g3.transform.Rotate(new Vector3(0, 0, -10));
-        g4.transform.Rotate(new Vector3(0, 0, -40));
+        g4.transform.Rotate(new Vector3(0, 0, -20));
         transform.SetParent(null);
     }
 
@@ -174,4 +195,11 @@ public class IceFairy : MonoBehaviour
        waiting = true;
     }
 
+    public void ThrowSingleIce(){
+            var ice = GameObject.Instantiate(icicleStraight, transform.position,Quaternion.identity);
+            var player = Object.FindObjectOfType<Player>().gameObject;
+            var playerPos = player.transform;
+            ice.transform.LookAt(playerPos,Vector3.up);
+            ice.transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+    }
 }
