@@ -43,7 +43,7 @@ public class IceFairy : MonoBehaviour {
                 isDead = true;
             }
             iFrames = 1f;
-            health -= 10.033f;
+            health -= 0.033f;
         }
     }
 
@@ -162,6 +162,9 @@ public class IceFairy : MonoBehaviour {
             RaiseSpikes();
             ThrowSingleIce();
         }
+         if (other.gameObject.GetComponent<Player>()) {
+            other.gameObject.GetComponent<Player>().SendMessage("GetDamage", 0.1f);
+         }
     }
 
     public void Drop() {
