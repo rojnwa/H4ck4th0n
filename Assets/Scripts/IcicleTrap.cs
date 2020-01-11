@@ -34,5 +34,6 @@ public class IcicleTrap : MonoBehaviour
     {
         bossfightActivated = true;
         boxCollider.enabled = true;
+        GameObject.FindObjectOfType<IceFairy>().SendMessage("DramaticIntro", null);
     }
 }

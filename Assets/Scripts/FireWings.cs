@@ -9,7 +9,8 @@ public class FireWings : MonoBehaviour
     void Start()
     {
         oScale=transform.localScale;
-        transform.localScale=Vector3.zero;
+        if (PlayerPrefs.GetInt("BossKilled", 0) != 1) 
+            transform.localScale=Vector3.zero;
         
     }
 
