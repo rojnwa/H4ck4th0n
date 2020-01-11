@@ -6,7 +6,7 @@ public class FireWings : MonoBehaviour
 {
     public Vector3 oScale;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         oScale=transform.localScale;
         if (PlayerPrefs.GetInt("BossKilled", 0) != 1) 
