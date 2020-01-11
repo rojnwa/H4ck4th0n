@@ -29,6 +29,24 @@ public class Player : MonoBehaviour {
 
     void Update() {
 
+        if (Input.GetButtonDown("Fire1")) {
+            animator.SetTrigger("Attack");
+            ToggleSwordCollider();
+            Invoke("ToggleSwordCollider", 0.3f);
+        }
+
+        if (Input.GetButtonDown("Jump") && (isGrounded == Grounded.Resting)) {
+            animator.SetTrigger("Jump");
+            isGrounded = Grounded.Jumping;
+            rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+
+            if (doubleJumpUpgradeAcquired && (isGrounded != Grounded.DoubleJumped) && Input.GetButtonDown("Jump")) {
+                animator.SetTrigger("DoubleJump");
+                isGrounded = Grounded.DoubleJumped;
+                rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            }
+        }
+
     }
 
     void ToggleSwordCollider() {
@@ -49,24 +67,6 @@ public class Player : MonoBehaviour {
             //camHelper.transform.localPosition = new Vector3(5, 0, 0);
             //transform.eulerAngles = new Vector3(0, 0, 0);
             transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 0, 0), Time.fixedDeltaTime * 10);
-        }
-
-        if (Input.GetButtonDown("Fire1")) {
-            animator.SetTrigger("Attack");
-            ToggleSwordCollider();
-            Invoke("ToggleSwordCollider", 0.3f);
-        }
-
-        if (Input.GetButtonDown("Jump") && (isGrounded == Grounded.Resting)) {
-            animator.SetTrigger("Jump");
-            isGrounded = Grounded.Jumping;
-            rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-
-            if (doubleJumpUpgradeAcquired && (isGrounded != Grounded.DoubleJumped) && Input.GetButtonDown("Jump")) {
-                animator.SetTrigger("DoubleJump");
-                isGrounded = Grounded.DoubleJumped;
-                rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            }
         }
 
         speed *= (Input.GetButton("Sprint") && sprintUpgradeUpgradeAcquired) ? 2 : 1;
