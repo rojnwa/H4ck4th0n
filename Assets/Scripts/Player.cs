@@ -23,6 +23,7 @@ public class Player : MonoBehaviour {
     private float iFrames;
 
     void Start() {
+        health = PlayerPrefs.GetFloat("Health", 1f);
         col2D = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -33,8 +34,14 @@ public class Player : MonoBehaviour {
 
     }
 
+    void Die() {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("Menu");
+    }
+
     void Update() {
-        if (health <= 0) SceneManager.LoadScene("Menu");
+        if (health <= 0) Die();
+
         if (iFrames > 0) {
             iFrames -= Time.deltaTime;
             float flashtime = 0.08333f;
@@ -141,6 +148,9 @@ public class Player : MonoBehaviour {
     }
 
     void Teleport(string location) {
+
+        PlayerPrefs.SetFloat("Health", health);
+        PlayerPrefs.Save();
         SceneManager.LoadScene(location);
     }
 
