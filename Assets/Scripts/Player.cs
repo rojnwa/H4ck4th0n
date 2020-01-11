@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
     private Rigidbody2D rb2D;
@@ -12,11 +13,12 @@ public class Player : MonoBehaviour {
     private bool doubleJumpUpgradeAcquired;
     private bool sprintUpgradeUpgradeAcquired;
     private bool dropPressed;
-    public CamHelper camHelper;
+    [SerializeField] private CamHelper camHelper;
     private Animator animator;
-    public Sword sword;
+    [SerializeField] private Sword sword;
     private PolygonCollider2D swordCol;
-    private float health = 1f;
+    [SerializeField] private float health = 1f;
+    [SerializeField] private Slider healthbar;
 
     void Start() {
         col2D = GetComponent<Collider2D>();
@@ -46,14 +48,15 @@ public class Player : MonoBehaviour {
             }
         }
 
+        healthbar.value = health;
+
     }
 
     void GetDamage(float damage) {
         health -= damage;
     }
 
-    void jumpUpgradeAcquired()
-    {
+    void jumpUpgradeAcquired() {
         GetComponentInChildren<FireWings>().gameObject.SetActive(true);
         doubleJumpUpgradeAcquired = true;
     }
