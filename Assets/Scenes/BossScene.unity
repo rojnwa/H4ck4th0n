@@ -4578,6 +4578,12 @@ PrefabInstance:
       propertyPath: wingsSpawnLocation
       value: 
       objectReference: {fileID: 887761980}
+    - target: {fileID: 3667079051980074513, guid: d1b2c7ae348763e4a87bf5545eab37e4,
+        type: 3}
+      propertyPath: wings
+      value: 
+      objectReference: {fileID: 3717434916224651729, guid: 4a73ed0185c527042a2a42545e39e7d7,
+        type: 3}
     - target: {fileID: 3667079051980074516, guid: d1b2c7ae348763e4a87bf5545eab37e4,
         type: 3}
       propertyPath: m_LocalPosition.x
