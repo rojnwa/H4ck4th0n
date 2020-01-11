@@ -11,24 +11,45 @@ public class Player : MonoBehaviour {
     private Grounded isGrounded = Grounded.Resting;
     private bool doubleJumpUpgradeAcquired;
     private bool sprintUpgradeUpgradeAcquired;
-    private float distToGround;
     private bool dropPressed;
     public CamHelper camHelper;
     private Animator animator;
     public Sword sword;
     private PolygonCollider2D swordCol;
+    private float health = 1f;
 
     void Start() {
         col2D = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         swordCol = sword.GetComponent<PolygonCollider2D>();
-        distToGround = col2D.bounds.extents.y;
     }
 
 
     void Update() {
 
+        if (Input.GetButtonDown("Fire1")) {
+            animator.SetTrigger("Attack");
+            ToggleSwordCollider();
+            Invoke("ToggleSwordCollider", 0.3f);
+        }
+
+        if (Input.GetButtonDown("Jump") && (isGrounded == Grounded.Resting)) {
+            animator.SetTrigger("Jump");
+            isGrounded = Grounded.Jumping;
+            rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+
+            if (doubleJumpUpgradeAcquired && (isGrounded != Grounded.DoubleJumped) && Input.GetButtonDown("Jump")) {
+                animator.SetTrigger("DoubleJump");
+                isGrounded = Grounded.DoubleJumped;
+                rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            }
+        }
+
+    }
+
+    void GetDamage(float damage) {
+        health -= damage;
     }
 
     void ToggleSwordCollider() {
@@ -49,24 +70,6 @@ public class Player : MonoBehaviour {
             //camHelper.transform.localPosition = new Vector3(5, 0, 0);
             //transform.eulerAngles = new Vector3(0, 0, 0);
             transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, 0, 0), Time.fixedDeltaTime * 10);
-        }
-
-        if (Input.GetButtonDown("Fire1")) {
-            animator.SetTrigger("Attack");
-            ToggleSwordCollider();
-            Invoke("ToggleSwordCollider", 0.3f);
-        }
-
-        if (Input.GetButtonDown("Jump") && (isGrounded == Grounded.Resting)) {
-            animator.SetTrigger("Jump");
-            isGrounded = Grounded.Jumping;
-            rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-
-            if (doubleJumpUpgradeAcquired && (isGrounded != Grounded.DoubleJumped) && Input.GetButtonDown("Jump")) {
-                animator.SetTrigger("DoubleJump");
-                isGrounded = Grounded.DoubleJumped;
-                rb2D.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            }
         }
 
         speed *= (Input.GetButton("Sprint") && sprintUpgradeUpgradeAcquired) ? 2 : 1;
