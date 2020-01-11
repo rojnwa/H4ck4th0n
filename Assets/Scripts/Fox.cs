@@ -11,7 +11,7 @@ public class Fox : MonoBehaviour
     private Rigidbody2D rb2D;
 
     [SerializeField]
-    private int playerDamage;
+    private float playerDamage = 0.1f;
 
     [SerializeField]
     private int health;
@@ -63,18 +63,23 @@ public class Fox : MonoBehaviour
                 transform.localScale = new Vector2(-1, 1);
             }
         }
-        else if (other.gameObject.GetComponent<Sword>() != null) {
-            if(other.transform.rotation.z != 0)
+        if (other.gameObject.GetComponent<Player>() != null)
+        {
+            other.gameObject.GetComponent<Player>().SendMessage("GetDamage", playerDamage);
+            if (!inCooldown)
+            {
+                animator.Play("Fox - Attack " + (int)Random.Range(1, 3));
+                triggeredWalking = false;
+                StartCoroutine(MovementCooldown());
+            }
+        }
+        else if (other.gameObject.GetComponent<Sword>() != null)
+        {
+            if (other.transform.rotation.z != 0)
             {
                 health -= 5;
             }
 
-        }
-        else if (!inCooldown)
-        {
-            animator.Play("Fox - Attack " + (int)Random.Range(1, 3));
-            triggeredWalking = false;
-            StartCoroutine(MovementCooldown());
         }
     }
 

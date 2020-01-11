@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour {
     private Rigidbody2D rb2D;
 
     [SerializeField]
-    private int playerDamage;
+    private float playerDamage = 0.1f;
 
     [SerializeField]
     private int health;
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.GetComponent<Player>() != null) {
-            //TODO DMG TO PLAYER
+            other.gameObject.GetComponent<Player>().SendMessage("GetDamage", playerDamage);
         } else if (other.gameObject.GetComponent<Sword>() != null) {
             health -= 5;
         } else {
