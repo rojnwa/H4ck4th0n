@@ -26,11 +26,14 @@ public class Player : MonoBehaviour {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         swordCol = sword.GetComponent<PolygonCollider2D>();
+        if (PlayerPrefs.GetInt("BossKilled", 0) == 1) {
+            jumpUpgradeAcquired();
+        }
+
     }
 
 
     void Update() {
-
         if (Input.GetButtonDown("Fire1")) {
             animator.SetTrigger("Attack");
             ToggleSwordCollider();
@@ -66,7 +69,6 @@ public class Player : MonoBehaviour {
     }
 
     void jumpUpgradeAcquired() {
-        GetComponentInChildren<FireWings>().gameObject.SetActive(true);
         doubleJumpUpgradeAcquired = true;
         var fireWingsGameObject = GetComponentInChildren<FireWings>().gameObject;
         fireWingsGameObject.transform.localScale = fireWingsGameObject.GetComponent<FireWings>().oScale;

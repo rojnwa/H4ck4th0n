@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6388408415463060269}
   - component: {fileID: 7272676331223334869}
   - component: {fileID: 621850128766350385}
+  - component: {fileID: -8688466345381803624}
   m_Layer: 0
   m_Name: Icicle
   m_TagString: Untagged
@@ -97,3 +98,66 @@ MonoBehaviour:
   timeToPause: 1
   positionSpeed: 7
   speed: 28
+--- !u!60 &-8688466345381803624
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503149612618930126}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.75, y: 1.09}
+    newSize: {x: 2.75, y: 1.09}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.115, y: -0.114999995}
+      - {x: 1.135, y: -0.125}
+      - {x: 1.275, y: -0.044999998}
+      - {x: 1.305, y: -0.024999999}
+      - {x: 1.305, y: 0.024999999}
+      - {x: 1.295, y: 0.055}
+      - {x: 1.2049999, y: 0.074999996}
+      - {x: 0.98499995, y: 0.145}
+      - {x: 0.895, y: 0.175}
+      - {x: 0.705, y: 0.24499999}
+      - {x: 0.645, y: 0.265}
+      - {x: 0.475, y: 0.325}
+      - {x: 0.255, y: 0.39499998}
+      - {x: 0.195, y: 0.415}
+      - {x: 0.055, y: 0.415}
+      - {x: -0.065, y: 0.385}
+      - {x: -0.24499999, y: 0.305}
+      - {x: -0.355, y: 0.265}
+      - {x: -0.625, y: 0.16499999}
+      - {x: -0.815, y: 0.085}
+      - {x: -0.91499996, y: 0.044999998}
+      - {x: -1.055, y: 0.015}
+      - {x: -1.275, y: -0.015}
+      - {x: -1.3149999, y: -0.044999998}
+      - {x: -1.3149999, y: -0.065}
+      - {x: -1.285, y: -0.095}
+      - {x: -1.2049999, y: -0.114999995}
+      - {x: -1.015, y: -0.16499999}
+      - {x: -0.645, y: -0.24499999}
+      - {x: -0.48499998, y: -0.275}
+      - {x: -0.275, y: -0.305}
+      - {x: 0.085, y: -0.345}
+      - {x: 0.345, y: -0.355}
+      - {x: 0.355, y: -0.36499998}
+      - {x: 0.415, y: -0.375}
+      - {x: 0.60499996, y: -0.375}
+      - {x: 0.645, y: -0.345}
+      - {x: 0.945, y: -0.205}
