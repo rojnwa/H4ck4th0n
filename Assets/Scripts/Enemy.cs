@@ -43,18 +43,20 @@ public class Enemy : MonoBehaviour {
         } else if (other.gameObject.GetComponent<Sword>() != null) {
             health -= 5;
         } else {
-                if (dir == Direction.Left) {
-                    dir = Direction.Right;
-                } else {
-                    dir = Direction.Left;
-                }
+            if (dir == Direction.Left) {
+                dir = Direction.Right;
+            } else {
+                dir = Direction.Left;
+            }
         }
     }
     // Update is called once per frame
     void Update() {
 
-        if (health <= 0)
+        if (health <= 0) {
+            GameObject.Find("Player").SendMessage("Heal", 0.1f);
             Destroy(gameObject);
+        }
 
         if (dir == Direction.Left) {
             velocity.x = -1;
